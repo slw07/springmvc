@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+	
+	<context:component-scan base-package="com.slw.hadoop">
+	</context:component-scan>
+	<!-- 注解的处理器映射器和适配器  取代下面的映射器和适配器-->
+	<mvc:annotation-driven />
+	<!-- 注解的映射器
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+ 	-->
+	<!-- 注解的适配器 
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+    -->
+    
+	
+	<!-- 处理器映射器   将bean的name作为url进行查找，需要在配置Handler时指定beanname(就是url)
+	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+	</bean>
+	-->
+	
+	 <!-- 视图解析器 解析jsp,默认使用jstl,classpath下要有jstl的包   -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+</beans>
