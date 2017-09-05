@@ -7,6 +7,5 @@
 <title>Insert title here</title>
 </head>
 <body>
-2222222222222222222
 </body>
 </html>

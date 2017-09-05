@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+    <bean name="lawQueueJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="name" value="law_job"/>
+        <property name="group" value="law_group"/>
+        <property name="jobClass" value="com.hhwy.vehicleProcess.jobs.LawQueueJob"/>
+        <property name="durability" value="true"/>
+        <!-- 指定spring容器的key，如果不设定在job中的jobmap中是获取不到spring容器的 -->
+        <property name="applicationContextJobDataKey" value="applicationContext"/>
+    </bean>
+    
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="name" value="law_trigger"/>
+        <property name="group" value="law_trigger_group"/>
+        <property name="jobDetail" ref="lawQueueJob"/>
+        <property name="cronExpression" value="* 0/30 * * * ?" />
+        <!-- 延时启动 
+        <property name="startDelay" value="10000"/>-->
+    </bean>
+    <!-- 自定义factory，解决job不能在spring容器中初始化的问题 -->
+	<bean id="mJobFactory" class="com.hhwy.vehicleProcess.jobs.PersonalJobFactory">
+	</bean>
+    
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    	<property name="jobFactory" ref="mJobFactory"></property>
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+    </bean>
+    
+</beans>
