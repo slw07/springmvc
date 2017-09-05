@@ -6,7 +6,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 	
-	<context:component-scan base-package="com.slw.hadoop">
+	<context:component-scan base-package="com.slw.spring">
 	</context:component-scan>
 	<!-- 注解的处理器映射器和适配器  取代下面的映射器和适配器-->
 	<mvc:annotation-driven />

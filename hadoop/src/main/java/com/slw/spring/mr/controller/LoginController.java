@@ -1,4 +1,4 @@
-package com.slw.hadoop.mr.controller;
+package com.slw.spring.mr.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
