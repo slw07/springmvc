@@ -5,4 +5,12 @@
 	<select id="getUsers" resultType="com.slw.spring.mr.entity.User">
 		select * from tuser
 	</select>
+	
+	<update id="updateUser" parameterType="com.slw.spring.mr.entity.User">
+		update tuser set name = '33' where id = '002'
+	</update>
+	
+	<insert id="insertUser" parameterType="com.slw.spring.mr.entity.User">
+		insert into tuser(id,userid,name) values(#{id},#{userId},#{name})
+	</insert>
 </mapper>
